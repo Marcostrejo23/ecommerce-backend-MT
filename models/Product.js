@@ -20,7 +20,7 @@ Product.init(
       autoIncrement: true,
     },
     stock: {
-      type: dayaTypes.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     category_id: {
