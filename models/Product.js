@@ -24,7 +24,7 @@ Product.init(
       allowNull: false,
     },
     category_id: {
-      type: DataTypes: INTEGER,
+      type: DataTypes.INTEGER,
       model: 'category',
       allowNull: false,
       key: 'id',
