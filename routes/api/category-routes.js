@@ -25,7 +25,7 @@ router.get('/:id', (req, res) => {
     })
     res.status(200).json({message:categoryInformation ? res.json(categoryInformation): "please select from a different category"});
   }catch (err){
-    res,status(400).json(err)
+    res,status(404).json(err)
   }
   // find one category by its `id` value
   // be sure to include its associated Products
@@ -50,13 +50,27 @@ router.put('/:id', (req, res) => {
    console.log(updateCategory)
    res.status(200).json({message:updateCategory[0] ? 'Category update' : 'Category unavailable'})
   }catch (err){
-    res.status(400).json(err)
+    res.status(404).json(err)
   }
 });
 
 router.delete('/:id', (req, res) => {
   // delete a category by its `id` value
-
+  try {
+    const deleteCategory = await Category.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    if(!deleteCategory){
+      res.status(404).json({message: 'Category unavailable'});
+    }
+    res.status(200).json(deleteCategory);
+  
+  } catch (err) {
+     res.status(500).json(err);
+  }
 });
+
 
 module.exports = router;
