@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { json } = require('sequelize/types');
 const { Category, Product } = require('../../models');
 
 // The `/api/categories` endpoint
@@ -32,14 +33,30 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   // create a new category
+  try{
+    const newCategory = await Category.create(req.body);
+  res.status(200).json(newCategory)
+  }catch(err){
+    res.status(200).json({message:editCategory[0] ? 'Category update' : 'Category unavailable'})
+  }
 });
 
 router.put('/:id', (req, res) => {
   // update a category by its `id` value
+  try {
+    const updateCategory = await Category.update(req.body,{
+      where:{id:req.params.id},
+    })
+   console.log(updateCategory)
+   res.status(200).json({message:updateCategory[0] ? 'Category update' : 'Category unavailable'})
+  }catch (err){
+    res.status(400).json(err)
+  }
 });
 
 router.delete('/:id', (req, res) => {
   // delete a category by its `id` value
+
 });
 
 module.exports = router;
