@@ -16,10 +16,18 @@ router.get('/', async (req, res) => {
   // be sure to include its associated Product data
 });
 
-router.get('/:id', (req, res) => {
-  // find a single tag by its `id`
-  // be sure to include its associated Product data
-});
+router.get('/:id', (req, res) =>{
+  
+  try{ 
+   const tagDAta = await Tag.findOne({
+     where: {id:req.params.id},
+     include: {model:product,attributes:{exclude:[`createdAt`, `updatedAt`]}},
+     through:{attributes: {exclude: [`createdAt`,`updatedAt`]}},
+   })
+   res.status(200).json(message:tag ? res.json(tag): 'no tag found')
+  }catch(err){
+    res.status(400).json(err)
+  }; 
 
 router.post('/', (req, res) => {
   // create a new tag
