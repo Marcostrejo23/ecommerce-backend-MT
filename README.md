@@ -1,7 +1,7 @@
 # ecommerce-backend-MT
 
 #Description:
-This project is designed to show a back end for inventory managment of an e commerce business, with full CRUD functionality for products, categories, and product tages. 
+This project is designed to show a back end for inventory managment of an e commerce business, with full CRUD functionality for products, categories, and product tags. 
 
 #Installation
 Clone the repository to your local machine, then run npmi to install dependencies. 
