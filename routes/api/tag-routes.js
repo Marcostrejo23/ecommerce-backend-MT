@@ -4,7 +4,7 @@ const { Tag, Product, ProductTag } = require('../../models');
 router.get('/', async (req, res) => {
   try{
     const tag = await Tag.findAll({
-      include: [{ model:Product, attributes:{exclude: [`createdAt` , `updatedAt`]} }],
+      include: [{ model:Product, attributes:{exclude: [`createdAt` , `updatedAt`]}}],
       through:{attributes: {exclude: [`createdAt`, `updatedAt`]}},
       attributes: {exclude: [`createdAt`, `updatedAt`]}
     })
